@@ -1,0 +1,29 @@
+@import '../../Styles/constants.scss';
+
+.btnFilter {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background-color: $bgFilter;
+    border: 1px solid $grey-color;
+    text-align: center;
+}
+
+.btnFilter:first-child {
+    border-radius: 10% 0% 0% 10%;
+}
+
+.btnFilter:last-child {
+    border-radius: 0% 10% 10% 0%;
+}
+
+.btnFilter:hover{
+    background-color: $grey-color;
+}
+
+.btnFilter:focus {
+    background-color: $grey-color;
+    outline: 0
+}
+
+#filter-nav{
+    text-align: center;
+}

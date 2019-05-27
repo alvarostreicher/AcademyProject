@@ -1,0 +1,25 @@
+@import "../../Styles/constants.scss";
+
+.headers {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+#header-subtitle {
+    color: $header-subtitle;
+
+}
+
+#header-subtitle:before {
+    content: $header-subtitle-before;
+    font-size: $header-subtitle_before_after-size;
+}
+
+#header-subtitle:after {
+    content: $header-subtitle-after;
+    font-size: $header-subtitle_before_after-size;
+}
+
+#header {
+    margin-top: .5rem;
+}

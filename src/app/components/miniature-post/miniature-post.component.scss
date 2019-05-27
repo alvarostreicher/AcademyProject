@@ -1,0 +1,13 @@
+@import '../../Styles/constants.scss';
+
+.imgContainer {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+}
+
+.contentContainer {
+    color: $white;
+    margin-top: 5rem;
+}

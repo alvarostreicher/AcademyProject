@@ -1,0 +1,11 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let post of posts$ | async">
+    <app-miniature-post 
+    [title]="post?.title"
+    [comments]="post?.comments?.length"
+    [shortDescription]="post?.shortDescription"
+    [category]="post?.category"
+    [Image]="post?.image" >
+    </app-miniature-post>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -9,7 +9,11 @@ export class ApiCallsService {
 
   constructor(private http: HttpClient ) { }
 
-  getCategories(): Observable<object[]> {
-    return this.http.get<object[]>('http://172.22.129.92:5000/api/v1/categories')
+  getCategories(): Observable<[]> {
+    return this.http.get<[]>('http://private-c3edb-postsmock.apiary-mock.com/categories')
+  }
+
+  getPosts(): Observable<object[]> {
+    return this.http.get<object[]>('https://private-c3edb-postsmock.apiary-mock.com/posts')
   }
 }

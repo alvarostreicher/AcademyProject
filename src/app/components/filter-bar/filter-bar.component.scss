@@ -1,27 +1,25 @@
 @import '../../Styles/constants.scss';
+@import '~@angular/material/_theming.scss';
+
+@include mat-core();
 
 .btnFilter {
     padding: 0.5rem 1rem 0.5rem 1rem;
-    background-color: $bgFilter;
-    border: 1px solid $grey-color;
+    border: 1px solid $dark-focused;
     text-align: center;
+    border-radius: 0;
 }
 
 .btnFilter:first-child {
-    border-radius: 10% 0% 0% 10%;
+    border-radius: 5% 0% 0% 5%;
 }
 
 .btnFilter:last-child {
-    border-radius: 0% 10% 10% 0%;
-}
-
-.btnFilter:hover{
-    background-color: $grey-color;
+    border-radius: 0% 5% 5% 0%;
 }
 
 .btnFilter:focus {
-    background-color: $grey-color;
-    outline: 0
+    background-color: $dark-focused
 }
 
 #filter-nav{

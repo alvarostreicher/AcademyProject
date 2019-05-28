@@ -11,3 +11,9 @@
     color: $white;
     margin-top: 5rem;
 }
+
+.subContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}

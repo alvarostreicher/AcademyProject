@@ -1,8 +1,11 @@
 <div class="imgContainer" [style.backgroundImage]="getImage()">
   <div class="contentContainer">
-    <h3>Titulo</h3>
-    <span>commentarios</span>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem ea sapiente facilis voluptate voluptatibus corporis tempore ipsum, odio quasi, animi vero veritatis labore incidunt, optio cum sequi aspernatur odit non.</p>
-    <span>TYPE</span>
+    <h3>{{ title }}</h3>
+    <span>{{ comments }} comments <mat-icon>chat_bubble_icon</mat-icon></span>
+    <p>{{ shortDescription }}</p>
+    <div class="subContainer">
+    <span>{{ category }}</span>
+    <app-btn-edit-delete></app-btn-edit-delete>
+  </div>
   </div>
 </div>

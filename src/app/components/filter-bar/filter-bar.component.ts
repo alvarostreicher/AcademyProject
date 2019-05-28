@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./filter-bar.component.scss']
 })
 export class FilterBarComponent implements OnInit {
-  categories$ : Observable<object>;
+  categories$ : Observable<[]>;
 
   constructor( private apiCallsService: ApiCallsService ) { }
 

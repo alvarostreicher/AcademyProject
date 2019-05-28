@@ -8,6 +8,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class MiniaturePostComponent implements OnInit {
   @Input() Image: String;
+  @Input() title: String;
+  @Input() shortDescription: String;
+  @Input() category: String;
+  @Input() comments: Number;
+  
   constructor(private sanitization : DomSanitizer) { }
 
   ngOnInit() {

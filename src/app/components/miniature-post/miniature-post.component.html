@@ -1,11 +1,14 @@
-<div class="imgContainer" [style.backgroundImage]="getImage()">
-  <div class="contentContainer">
-    <h3>{{ title }}</h3>
-    <span>{{ comments }} comments <mat-icon>chat_bubble_icon</mat-icon></span>
-    <p>{{ shortDescription }}</p>
-    <div class="subContainer">
-    <span>{{ category }}</span>
-    <app-btn-edit-delete></app-btn-edit-delete>
-  </div>
-  </div>
-</div>
+    <a href="">
+      <div class="imgContainer" [style.backgroundImage]="getImage()">
+        <div class="contentContainer">
+          <h3 class="title">{{ title }}</h3>
+          <span class="comments">{{ comments }} comments <mat-icon>chat_bubble_icon</mat-icon></span>
+          <p class="shortDescription">{{ shortDescription }}</p>
+          <div class="subContainer">
+            <span class="category">{{ category | uppercase }}</span>
+            <app-btn-edit-delete class="btnEditDelete"></app-btn-edit-delete>
+          </div>
+        </div>
+      </div>
+    </a>
+

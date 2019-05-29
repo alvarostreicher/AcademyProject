@@ -5,6 +5,13 @@
     background-size: cover;
     background-position: center;
     padding: 2rem;
+    min-height: 100%;
+    position: relative;
+}
+
+a {
+    text-decoration: none;
+    color: $white;
 }
 
 .contentContainer {
@@ -12,8 +19,44 @@
     margin-top: 5rem;
 }
 
+.title {
+    font-size: 38px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.comments {
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.shortDescription {
+    margin-right: 5rem;
+    display: block;
+}
+
 .subContainer {
     display: flex;
     justify-content: space-between;
     align-items: center
 }
+
+.category{
+    font-size: .9rem;
+    font-weight: 500;
+    letter-spacing: .2rem;
+}
+
+.imgContainer {
+    .btnEditDelete {
+        visibility: hidden;
+    }
+}
+
+.imgContainer:hover {
+    .btnEditDelete {
+        visibility: visible;
+    }
+}
+
+

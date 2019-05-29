@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiCallsService } from '../../api-calls.service';
 import { Observable } from 'rxjs';
+import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
 
 @Component({
   selector: 'app-filter-bar',
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class FilterBarComponent implements OnInit {
   categories$ : Observable<[]>;
+ 
 
   constructor( private apiCallsService: ApiCallsService ) { }
 

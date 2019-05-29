@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +16,9 @@ import { MiniaturePostComponent } from './components/miniature-post/miniature-po
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BtnEditDeleteComponent } from './components/btn-edit-delete/btn-edit-delete.component';
 import { PostsIndexComponent } from './components/posts-index/posts-index.component';
+import { AddPostBtnComponent } from './components/add-post-btn/add-post-btn.component';
+import { PostModalComponent } from './components/post-modal/post-modal.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -23,8 +28,11 @@ import { PostsIndexComponent } from './components/posts-index/posts-index.compon
     FilterBarComponent,
     MiniaturePostComponent,
     BtnEditDeleteComponent,
-    PostsIndexComponent
+    PostsIndexComponent,
+    AddPostBtnComponent,
+    PostModalComponent
   ],
+  entryComponents: [PostModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,7 +40,10 @@ import { PostsIndexComponent } from './components/posts-index/posts-index.compon
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

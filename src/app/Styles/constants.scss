@@ -1,12 +1,11 @@
-//TEXTS COLOR
+//COLORs
 $white: #fff;
+$coral: coral;
+$grey-color: lightgrey;
+$bgFilter: $white;
 
 //HEADER
-$header-subtitle: orangered;
+$header-subtitle: $coral;
 $header-subtitle-before: '[ ';
 $header-subtitle-after: ' ]';
 $header-subtitle_before_after-size: 1.5rem;
-
-//FILTER BUTTON
-$grey-color: lightgrey;
-$bgFilter: #fff;

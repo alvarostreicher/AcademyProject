@@ -1,5 +1,7 @@
 <div id="filter-nav">
-  <button class="btnFilter" mat-button [autofocus]="true">All</button>
+  <button class="btnFilter" mat-button 
+  [autofocus]="true"
+  [style.fontWeight] = "400">All</button>
   <button class="btnFilter" mat-button
   *ngFor="let category of categories$ | async" 
   [style.fontWeight] = "400"

@@ -6,6 +6,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +21,7 @@ import { BtnEditDeleteComponent } from './components/btn-edit-delete/btn-edit-de
 import { PostsIndexComponent } from './components/posts-index/posts-index.component';
 import { AddPostBtnComponent } from './components/add-post-btn/add-post-btn.component';
 import { PostModalComponent } from './components/post-modal/post-modal.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatGridListModule,
     MatDialogModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,19 @@
+.columnLayout {
+display: flex;
+flex-direction: column;
+}
+
+.modalTitle {
+    text-align: center;
+    font-weight: 500;
+}
+
+.modalButtons {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.modalButton {
+    width: 7vw;
+}

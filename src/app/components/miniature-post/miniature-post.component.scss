@@ -37,8 +37,13 @@ a {
 
 .subContainer {
     display: flex;
-    justify-content: space-between;
-    align-items: center
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    bottom: 1.5rem;
+    right: 0;
+    width: 100%;
+    
 }
 
 .category{
@@ -47,16 +52,18 @@ a {
     letter-spacing: .2rem;
 }
 
-.imgContainer {
-    .btnEditDelete {
-        visibility: hidden;
-    }
+
+.btnEditDelete {
+    margin-right: 1rem;
 }
 
-.imgContainer:hover {
-    .btnEditDelete {
-        visibility: visible;
-    }
+ .imgPostContainer:hover > .subContainer  > .btnEditDelete {
+    visibility: visible;
 }
+
+.imgPostContainer > .subContainer > .btnEditDelete {
+    visibility: hidden;
+}
+
 
 

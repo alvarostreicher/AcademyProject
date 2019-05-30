@@ -1,3 +1,31 @@
-<p>
-  post-modal works!
-</p>
+<h3 class="modalTitle">Create Post</h3>
+<form [formGroup]="Forma" (ngSubmit)="onSubmit()">
+<mat-dialog-content class="columnLayout">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input type="text" matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea type="text" matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select value="categories[0]" [placeholder]="categories[0]" formControlName="select">
+          <mat-option value="option">{{ categories[0] }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>URL of the image</mat-label>
+        <input type="url" matInput formControlName="url">
+        <mat-icon matSuffix>link</mat-icon>
+      </mat-form-field>
+  
+</mat-dialog-content>
+<mat-dialog-actions class="modalButtons">
+    <button mat-button mat-dialog-close class="modalButton">Cancel</button>
+    <button mat-raised-button color="primary" class="modalButton" type="submit">Save</button>
+</mat-dialog-actions>
+</form>

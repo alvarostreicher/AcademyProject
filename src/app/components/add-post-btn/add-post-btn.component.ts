@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs';
 })
 export class AddPostBtnComponent implements OnInit {
   sub$: Subscription;
-  theNewPost : object;
   @Output() newPost : EventEmitter<object> = new EventEmitter<object>();
+  @Output() reference : EventEmitter<any> = new EventEmitter<any>();
 
   constructor(public dialog : MatDialog) { }
 
@@ -20,8 +20,8 @@ export class AddPostBtnComponent implements OnInit {
 
   openDialog() {
     let dialogRef = this.dialog.open(PostModalComponent, { minWidth: '40vw', minHeight: '40vh'})
-    this.sub$ = dialogRef.componentInstance.sendPost.subscribe((post)=> this.newPost.emit(post));
-
+    dialogRef.componentInstance.sendPost.subscribe((post)=> this.newPost.emit(post));
+    this.reference.emit(dialogRef);
   }
 
 }

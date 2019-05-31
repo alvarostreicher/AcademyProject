@@ -46,7 +46,6 @@ export class PostModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.Forma.value)
     if(this.Forma.status === 'VALID'){
       this.sendPost.emit(this.Forma.value)
     }

@@ -5,7 +5,9 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <app-add-post-btn (newPost)="postAddEvent($event)"></app-add-post-btn>
+      <app-add-post-btn 
+      (newPost)="postAddEvent($event)"
+      (reference)="addModalReference($event)"></app-add-post-btn>
     </div>
   </div>
   <!-- <router-outlet></router-outlet> -->
@@ -16,6 +18,8 @@
   </div>
 <div class="margins row">
     <app-miniature-post 
+    (editPost)="editPostEvent($event)"
+    (reference)="editModalReference($event)"
     class="resetPadding col-md-6 col-sm-12" *ngFor="let post of posts"
     [title]="post?.title"
     [comments]="post?.comments?.length"

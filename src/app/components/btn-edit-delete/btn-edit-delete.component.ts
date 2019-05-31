@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-btn-edit-delete',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BtnEditDeleteComponent implements OnInit {
 
+  @Output() sendEditClickOne : EventEmitter<object> = new EventEmitter<object>();
   constructor() { }
 
   ngOnInit() {
   }
+
+  onEdit(){
+    this.sendEditClickOne.emit({});
+  }
+
 
 }

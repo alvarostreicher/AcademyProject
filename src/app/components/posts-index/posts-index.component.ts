@@ -34,8 +34,6 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   }
 
   postAddEvent (event) {
-    console.log('estoy en el inde')
-    console.log(event);
     this.posts.unshift(event)
   }
   

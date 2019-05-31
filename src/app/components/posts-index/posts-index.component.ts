@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiCallsService } from 'src/app/api-calls.service';
 import { Observable, Subscription } from 'rxjs';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-posts-index',
@@ -12,7 +13,8 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   posts$ : Observable<object[]>;
   posts : object[];
   sub$ : any;
-
+  subModal$: any;
+  subSnack$: any;
 
   constructor(private apiCallService : ApiCallsService) { }
 
@@ -35,13 +37,13 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
 
   postAddEvent (event) {
     this.posts.unshift(event);
-    this.sub$.componentInstance.sendPost.unsubscribe();
-    this.sub$.close();
+    this.subModal$.componentInstance.sendPost.unsubscribe();
+    this.subModal$.close();
   }
   
 
   addModalReference (event) {
-    this.sub$ = event;
+    this.subModal$ = event;
   }
 
   editPostEvent(event) {
@@ -52,12 +54,24 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
       }
       }));
     this.posts[indexEdit] = event;
-    this.sub$.componentInstance.sendPost.unsubscribe();
-    this.sub$.close();
+    this.subModal$.componentInstance.sendPost.unsubscribe();
+    this.subModal$.close();
   }
 
   editModalReference(event) {
-    this.sub$ = event;
+    this.subModal$ = event;
+  }
+
+ async snackBarEvent(event){
+    let backup = this.posts.map((x)=> x);
+    let indexDelete;
+    this.posts.filter((post, index)=> Object.values(post).forEach(value=>{
+      if(value === event.id){
+        indexDelete = index;
+      }
+      }));
+    this.posts.splice( indexDelete, 1 );
+    this.subSnack$ = await event.snack.onAction().subscribe(()=> this.posts = backup);
   }
 
 }

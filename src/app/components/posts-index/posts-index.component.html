@@ -20,6 +20,7 @@
     <app-miniature-post 
     (editPost)="editPostEvent($event)"
     (reference)="editModalReference($event)"
+    (snackReference)="snackBarEvent($event)"
     class="resetPadding col-md-6 col-sm-12" *ngFor="let post of posts"
     [title]="post?.title"
     [comments]="post?.comments?.length"

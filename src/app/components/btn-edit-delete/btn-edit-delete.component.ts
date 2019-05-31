@@ -8,6 +8,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class BtnEditDeleteComponent implements OnInit {
 
   @Output() sendEditClickOne : EventEmitter<object> = new EventEmitter<object>();
+  @Output() sendDeleteClickOne : EventEmitter<object> = new EventEmitter<object>();
   constructor() { }
 
   ngOnInit() {
@@ -17,5 +18,8 @@ export class BtnEditDeleteComponent implements OnInit {
     this.sendEditClickOne.emit({});
   }
 
+  onDelete(){
+    this.sendDeleteClickOne.emit({});
+  }
 
 }

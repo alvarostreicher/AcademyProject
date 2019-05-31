@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { Subscription } from 'rxjs';
-import { reference } from '@angular/core/src/render3';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-miniature-post',
@@ -20,10 +20,11 @@ export class MiniaturePostComponent implements OnInit {
   @Input() comments: Number;
   sub$ : Subscription;
   @Output() reference : EventEmitter<any> = new EventEmitter<any>();
+  @Output() snackReference : EventEmitter<any> = new EventEmitter<any>();
   @Output() editPost : EventEmitter<object> = new EventEmitter<object>();
   
   
-  constructor(private sanitization : DomSanitizer, public dialog : MatDialog) { }
+  constructor(private sanitization : DomSanitizer, public dialog : MatDialog, public snackBar : MatSnackBar) { }
 
   ngOnInit() {
     
@@ -47,6 +48,12 @@ export class MiniaturePostComponent implements OnInit {
     });
      refModal.componentInstance.sendPost.subscribe((post)=> this.editPost.emit(post));
      this.reference.emit(refModal);
+  }
+
+  sendDelete(){
+    let snackRef = this.snackBar.open(`Dele Post: ${this.title}`, 'UNDO', { duration: 3000 });
+    let data = {snack: snackRef, id: this.id}
+    this.snackReference.emit(data);
   }
 
 }

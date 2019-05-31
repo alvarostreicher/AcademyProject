@@ -18,6 +18,7 @@ export class MiniaturePostComponent implements OnInit {
   @Input() id: any;
   @Input() category: String;
   @Input() comments: Number;
+  @Input() route : [];
   sub$ : Subscription;
   @Output() reference : EventEmitter<any> = new EventEmitter<any>();
   @Output() snackReference : EventEmitter<any> = new EventEmitter<any>();

@@ -22,6 +22,8 @@ import { BtnEditDeleteComponent } from './components/btn-edit-delete/btn-edit-de
 import { PostsIndexComponent } from './components/posts-index/posts-index.component';
 import { AddPostBtnComponent } from './components/add-post-btn/add-post-btn.component';
 import { PostModalComponent } from './components/post-modal/post-modal.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
 
 
 
@@ -34,7 +36,9 @@ import { PostModalComponent } from './components/post-modal/post-modal.component
     BtnEditDeleteComponent,
     PostsIndexComponent,
     AddPostBtnComponent,
-    PostModalComponent
+    PostModalComponent,
+    NotFoundComponent,
+    PostDetailsComponent
   ],
   entryComponents: [PostModalComponent],
   imports: [

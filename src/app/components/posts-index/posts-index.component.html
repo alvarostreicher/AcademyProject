@@ -1,8 +1,3 @@
-<div class="row">
-    <div class="col-md-12">
-      <app-headers></app-headers>
-    </div>
-  </div>
   <div class="row">
     <div class="col-md-12">
       <app-add-post-btn 
@@ -10,7 +5,6 @@
       (reference)="addModalReference($event)"></app-add-post-btn>
     </div>
   </div>
-  <!-- <router-outlet></router-outlet> -->
   <div class="row">
     <div class="col-md-12">
       <app-filter-bar (categoryClick)="onFilter($event)"></app-filter-bar>
@@ -22,6 +16,7 @@
     (reference)="editModalReference($event)"
     (snackReference)="snackBarEvent($event)"
     class="resetPadding col-md-6 col-sm-12" *ngFor="let post of posts"
+    [route]="['posts',post?.id]"
     [title]="post?.title"
     [comments]="post?.comments?.length"
     [shortDescription]="post?.shortDescription"

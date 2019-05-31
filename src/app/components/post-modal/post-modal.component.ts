@@ -22,7 +22,7 @@ export class PostModalComponent implements OnInit, OnDestroy {
     this.Forma = this.formBuilder.group({
       title: [null, Validators.required],
       shortDescription: [null,Validators.required],
-      category: [this.categories.length > 0 ? this.categories[0] : [''] , [Validators.required, Validators.min(0)]],
+      category: [this.categories.length > 0 ? this.categories[0] : '' , [Validators.required, Validators.min(0)]],
       image: ['https://source.unsplash.com/random', [Validators.required, Validators.pattern("^(http|https)+://+[a-z-A-Z|.|?|%|0-9|/_=+]+")]]
     })
   }
@@ -33,7 +33,6 @@ export class PostModalComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if(this.Forma.status === 'VALID'){
-      console.log('new post dude')
       this.sendPost.emit(this.Forma.value)
     }
   }

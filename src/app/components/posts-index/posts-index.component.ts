@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiCallsService } from 'src/app/api-calls.service';
 import { Observable, Subscription } from 'rxjs';
+import {  filter, map } from 'rxjs/operators';
 import { post } from 'selenium-webdriver/http';
 
 @Component({
@@ -15,7 +16,8 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   sub$ : any;
   subModal$: any;
   subSnack$: any;
-
+  subFilter$: any;
+  postFiltered;
   constructor(private apiCallService : ApiCallsService) { }
 
   ngOnInit( ) {
@@ -72,6 +74,17 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
       }));
     this.posts.splice( indexDelete, 1 );
     this.subSnack$ = await event.snack.onAction().subscribe(()=> this.posts = backup);
+  }
+
+  onFilter(event) {
+    if(event !== 'all'){
+      this.sub$.unsubscribe();
+    this.subFilter$ = this.apiCallService.getPosts().subscribe(x=> this.posts = x.filter((post)=> Object.values(post).includes(event)));
+    }else {
+      this.getPosts();
+      this.subFilter$.unsubscribe();
+    }
+
   }
 
 }

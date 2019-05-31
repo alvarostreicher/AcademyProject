@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ApiCallsService } from '../../api-calls.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
 
 @Component({
@@ -8,9 +8,9 @@ import { removeDebugNodeFromIndex } from '@angular/core/src/debug/debug_node';
   templateUrl: './filter-bar.component.html',
   styleUrls: ['./filter-bar.component.scss']
 })
-export class FilterBarComponent implements OnInit {
+export class FilterBarComponent implements OnInit, OnDestroy {
+  @Output() categoryClick : EventEmitter<string> = new EventEmitter<string>();
   categories$ : Observable<[]>;
- 
 
   constructor( private apiCallsService: ApiCallsService ) { }
 
@@ -21,8 +21,12 @@ export class FilterBarComponent implements OnInit {
     this.getCaterogies();
   }
 
+  ngOnDestroy(){
+    
+  }
+
   setFilter = (category) => {
-    console.log(category);
+    this.categoryClick.emit(category)
   }
 
 }

@@ -56,7 +56,8 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
         indexEdit = index;
       }
       }));
-    this.posts[indexEdit] = event;
+    //this.posts[indexEdit] = event;
+    Object.assign(this.posts[indexEdit],event);
     this.subModal$.componentInstance.sendPost.unsubscribe();
     this.subModal$.close();
   }

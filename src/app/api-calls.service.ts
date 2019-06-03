@@ -13,7 +13,7 @@ export class ApiCallsService {
   constructor(private http: HttpClient ) { }
 
   getCategories(): Observable<[]> {
-    return this.http.get<[]>('http://private-c3edb-postsmock.apiary-mock.com/categories')
+    return this.http.get<[]>('https://private-c3edb-postsmock.apiary-mock.com/categories')
   }
 
   getPosts(): Observable<object[]> {

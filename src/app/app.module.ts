@@ -10,6 +10,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatCardModule} from '@angular/material/card';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,8 @@ import { AddPostBtnComponent } from './components/add-post-btn/add-post-btn.comp
 import { PostModalComponent } from './components/post-modal/post-modal.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { PostDetailsComponent } from './components/post-details/post-details.component';
+import { ImageUrlAppendPipe } from './image-url-append.pipe';
+import { ImageUrlAppendSimplePipe } from './image-url-append-simple.pipe';
 
 
 
@@ -38,7 +41,9 @@ import { PostDetailsComponent } from './components/post-details/post-details.com
     AddPostBtnComponent,
     PostModalComponent,
     NotFoundComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    ImageUrlAppendPipe,
+    ImageUrlAppendSimplePipe
   ],
   entryComponents: [PostModalComponent],
   imports: [
@@ -55,7 +60,8 @@ import { PostDetailsComponent } from './components/post-details/post-details.com
     ReactiveFormsModule,
     FormsModule,
     MatSelectModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

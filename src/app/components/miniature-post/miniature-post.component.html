@@ -1,6 +1,6 @@
     <div class="imgPostContainer">
     <a [routerLink]="route">
-      <div class="imgContainer" [style.backgroundImage]="getImage()">
+      <div class="imgContainer" [style.backgroundImage]="Image | imageUrlAppend">
         <div class="contentContainer">
           <h3 class="title">{{ title }}</h3>
           <span class="comments">{{ comments }} comments <mat-icon>chat_bubble_icon</mat-icon></span>

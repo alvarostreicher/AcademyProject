@@ -21,6 +21,11 @@ export class ApiCallsService {
     return this.posts;
   }
 
+  getPost(id): Observable<object[]> {
+    let path = `https://private-c3edb-postsmock.apiary-mock.com/posts/${id}`;
+    return this.http.get<object[]>(path)
+  }
+
 
 
 }

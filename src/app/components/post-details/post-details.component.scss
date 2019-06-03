@@ -1,0 +1,61 @@
+@import '../../Styles/constants.scss';
+
+.resetPadding {
+	padding: 0;
+}
+
+.jumbotron {
+	 height: 80vh;
+   color: $white;
+	 background-size: cover;
+	 background-position: center;
+	 background-repeat: no-repeat;
+	 display: flex;
+	 justify-content: center;
+	 align-items: center;
+	 h2{
+		font-size: 60px; 
+	 }
+}
+
+.btnTop{
+	color: $white;
+	position: absolute;
+	z-index: 1;
+	margin-top: 1rem;
+	margin-left: 1rem;
+}
+
+.description {
+	font-size: 2rem;
+}
+
+.postContainer {
+	display: flex;
+	justify-content: center;
+	.commentContainer {
+		width: 50%;
+	}
+	.avatar {
+		color: $white;
+		background-color: black;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	h3 {
+		font-size: 1.5rem;
+	}
+	.comment {
+		color: black;
+		font-size: 1.2rem;
+	}
+
+	.resetWidth {
+		width: 100%;
+		margin-top: 2rem;
+		.placeHolderSize{
+			font-size: 1.2rem;
+		}
+	}
+}

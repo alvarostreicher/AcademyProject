@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { Subscription } from 'rxjs';
@@ -25,15 +24,15 @@ export class MiniaturePostComponent implements OnInit {
   @Output() editPost : EventEmitter<object> = new EventEmitter<object>();
   
   
-  constructor(private sanitization : DomSanitizer, public dialog : MatDialog, public snackBar : MatSnackBar) { }
+  constructor( public dialog : MatDialog, public snackBar : MatSnackBar) { }
 
   ngOnInit() {
     
   }
 
-  getImage = () => {
-    return this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(${this.Image})`);
-  }
+  // getImage = () => {
+  //   return this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(${this.Image})`);
+  // }
 
   sendEdit(){
     let refModal = this.dialog.open(PostModalComponent, {

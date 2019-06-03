@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallsService } from 'src/app/api-calls.service';
-import { Observable } from 'rxjs';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-post-details',
@@ -12,26 +12,43 @@ export class PostDetailsComponent implements OnInit {
   paramId;
   filteredPost;
   Image: String; 
-
-  constructor( private route : ActivatedRoute, private apiCallsServices : ApiCallsService ) { }
+  Forma : FormGroup;
+  
+  constructor( private route : ActivatedRoute, private apiCallsServices : ApiCallsService, private formBuilder : FormBuilder,  private router: Router, ) { }
 
    ngOnInit() {
     this.paramId = this.route.snapshot.paramMap.get("id")
     this.getPost();
+    this.Forma = this.formBuilder.group({
+      comment: [null, Validators.required]
+    })
+  }
+
+  getPost(){
+    let data = [{new:  null}];
+   this.apiCallsServices.getPosts().subscribe((posts)=>{
+     data[0].new = posts;
+     this.filteredPost = data.map((post,index)=> post.new.filter((filterpost)=> filterpost.id == this.paramId ));
+   });
   }
 
   // getPost(){
-  //   let data = [{new:  null}];
-  //  this.apiCallsServices.getPosts().subscribe((posts)=>{
-  //    data[0].new = posts;
-  //    this.filteredPost = data.map((post,index)=> post.new.filter((filterpost)=> filterpost.id == this.paramId ));
-  //  });
+  //   this.apiCallsServices.getPost(this.paramId).subscribe((post)=> this.filteredPost = post);
   // }
 
-  getPost(){
-    this.filteredPost = this.apiCallsServices.getPost(this.paramId);
+  addComment(){
+    if(this.Forma.status === 'VALID'){
+      this.filteredPost[0][0].comments.push({
+        id: this.filteredPost[0][0].comments.length + 1,
+        author: 'Juan Cecina',
+        content: this.Forma.value.comment
+      })
+    }
+    this.Forma.reset();
   }
 
-
+  goBack(){
+    this.router.navigate([''])
+  }
 
 }

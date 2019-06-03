@@ -1,8 +1,8 @@
-<div *ngIf="filteredPost | async as post">
+<div *ngIf="filteredPost && filteredPost[0][0] as post">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-xl-12 resetPadding">
 			<div class="btnTop">
-				<button mat-button>
+				<button mat-button (click)="goBack()">
 					<mat-icon>keyboard_arrow_left</mat-icon> View Posts
 				</button>
 			</div>
@@ -29,15 +29,15 @@
 					</mat-card-subtitle>
 				</mat-card-header>
 			</mat-card>
-			<form action="">
+			<form (ngSubmit)="addComment()" [formGroup]="Forma">
 				<mat-form-field class="resetWidth">
 					<mat-label class="placeHolderSize">Write a comment</mat-label>
-					<textarea type="text" matInput></textarea>
+					<textarea type="text" matInput formControlName="comment"></textarea>
+					<mat-error *ngIf="Forma.controls['comment'].errors?.required">Comment can't be empty</mat-error>
 				</mat-form-field>
-				<button mat-raised-button color="primary">Add</button>
+				<button mat-raised-button color="primary" type="sumbit">Add</button>
 			</form>
 			</div>
 		</div>
 	</div>
-
 </div>

@@ -33,6 +33,7 @@
 .postContainer {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 2rem;
 	.commentContainer {
 		width: 50%;
 	}
@@ -54,8 +55,19 @@
 	.resetWidth {
 		width: 100%;
 		margin-top: 2rem;
+		margin-bottom: 1rem;
 		.placeHolderSize{
 			font-size: 1.2rem;
 		}
 	}
 }
+
+@media (min-width: 200px) and (max-width: 768px) { 
+	.postContainer {
+		display: flex;
+		justify-content: flex-start;
+		.commentContainer {
+			width: 100%;
+		}
+	}
+ }

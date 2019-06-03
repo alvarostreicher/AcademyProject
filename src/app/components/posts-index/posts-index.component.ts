@@ -28,6 +28,7 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
     this.sub$.unsubscribe();
   }
 
+  
   // getPosts() : Observable<object[]> {
   //   // return this.posts$ = this.apiCallService.getPosts();
     

@@ -51,7 +51,7 @@ export class MiniaturePostComponent implements OnInit {
   }
 
   sendDelete(){
-    let snackRef = this.snackBar.open(`Dele Post: ${this.title}`, 'UNDO', { duration: 3000 });
+    let snackRef = this.snackBar.open(`Delete Post: ${this.title}`, 'UNDO', { duration: 3000 });
     let data = {snack: snackRef, id: this.id}
     this.snackReference.emit(data);
   }

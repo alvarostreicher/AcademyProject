@@ -1,18 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallsService } from 'src/app/api-calls.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.component.html',
   styleUrls: ['./post-details.component.scss']
 })
-export class PostDetailsComponent implements OnInit {
+export class PostDetailsComponent implements OnInit, OnDestroy {
   paramId;
   filteredPost;
   Image: String; 
   Forma : FormGroup;
+  postSubscription : Subscription;
   
   constructor( private route : ActivatedRoute, private apiCallsServices : ApiCallsService, private formBuilder : FormBuilder,  private router: Router, ) { }
 
@@ -24,9 +26,13 @@ export class PostDetailsComponent implements OnInit {
     })
   }
 
+  ngOnDestroy() {
+    this.postSubscription.unsubscribe();
+  }  
+
   getPost(){
     let data = [{new:  null}];
-   this.apiCallsServices.getPosts().subscribe((posts)=>{
+   this.postSubscription = this.apiCallsServices.getPosts().subscribe((posts)=>{
      data[0].new = posts;
      this.filteredPost = data.map((post,index)=> post.new.filter((filterpost)=> filterpost.id == this.paramId ));
    });

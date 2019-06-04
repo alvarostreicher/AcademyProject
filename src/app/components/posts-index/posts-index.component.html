@@ -15,7 +15,7 @@
     (editPost)="editPostEvent($event)"
     (reference)="editModalReference($event)"
     (snackReference)="snackBarEvent($event)"
-    class="resetPadding col-md-6 col-sm-12" *ngFor="let post of posts"
+    class="resetPadding col-md-6 col-sm-12" *ngFor="let post of posts$ | async"
     [route]="['posts',post?.id]"
     [title]="post?.title"
     [comments]="post?.comments?.length"

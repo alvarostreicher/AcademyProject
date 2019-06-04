@@ -29,17 +29,17 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   }
 
   
-  // getPosts() : Observable<object[]> {
-  //   // return this.posts$ = this.apiCallService.getPosts();
+  getPosts() : Observable<object[]> {
+    return this.posts$ = this.apiCallService.getPosts();
     
-  // }
-  getPosts() : object[] {
-    this.sub$ = this.apiCallService.getPosts().subscribe((post)=> this.posts = post);
-    return this.posts;
   }
+  // getPosts() : object[] {
+  //   this.sub$ = this.apiCallService.getPosts().subscribe((post)=> this.posts = post);
+  //   return this.posts;
+  // }
 
   postAddEvent (event) {
-    this.posts.unshift(event);
+    this.apiCallService.addPost(event);
     this.subModal$.componentInstance.sendPost.unsubscribe();
     this.subModal$.close();
   }

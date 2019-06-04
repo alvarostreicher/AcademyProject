@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, subscribeOn } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
@@ -9,20 +9,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ApiCallsService {
 
   posts : Observable<object[]>;
+  categori;
 
   constructor(private http: HttpClient ) { }
 
   getCategories(): Observable<[]> {
-    return this.http.get<[]>('https://private-c3edb-postsmock.apiary-mock.com/categories')
+   return this.http.get<[]>('http://localhost:3000/api/v1/categories')
   }
 
   getPosts(): Observable<object[]> {
-    this.posts = this.http.get<object[]>('https://private-c3edb-postsmock.apiary-mock.com/posts');
-    return this.posts;
+    return this.http.get<object[]>('http://localhost:3000/api/v1/posts');
   }
 
+  addPost(objeto): Observable<object[]> {
+    console.log('entrooooo')
+    return this.http.post<object[]>('http://localhost:3000/api/v1/posts', objeto);
+  }   
+
   getPost(id): Observable<object[]> {
-    let path = `https://private-c3edb-postsmock.apiary-mock.com/posts/${id}`;
+    let path = `http://localhost:3000/api/v1/posts/${id}`;
     return this.http.get<object[]>(path)
   }
 

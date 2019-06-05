@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallsService } from 'src/app/api-calls.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-post-details',
@@ -14,7 +14,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   filteredPost;
   Image: String; 
   Forma : FormGroup;
-  postSubscription : Subscription;
+  post$ : Observable<object[]>;
   
   constructor( private route : ActivatedRoute, private apiCallsServices : ApiCallsService, private formBuilder : FormBuilder,  private router: Router, ) { }
 
@@ -27,15 +27,10 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.postSubscription.unsubscribe();
   }  
 
   getPost(){
-    let data = [{new:  null}];
-   this.postSubscription = this.apiCallsServices.getPosts().subscribe((posts)=>{
-     data[0].new = posts;
-     this.filteredPost = data.map((post,index)=> post.new.filter((filterpost)=> filterpost.id == this.paramId ));
-   });
+   this.post$ = this.apiCallsServices.getPost(this.paramId);
   }
 
   // getPost(){

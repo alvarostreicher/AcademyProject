@@ -25,13 +25,11 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy( ) {
-    this.sub$.unsubscribe();
   }
 
   
   getPosts() : Observable<object[]> {
-    return this.posts$ = this.apiCallService.getPosts();
-    
+    return this.posts$ = this.apiCallService.combinePostsAndCategory$;
   }
   // getPosts() : object[] {
   //   this.sub$ = this.apiCallService.getPosts().subscribe((post)=> this.posts = post);
@@ -50,14 +48,15 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   }
 
   editPostEvent(event) {
-    let indexEdit;
-    this.posts.filter((post, index)=> Object.values(post).forEach(value=>{
-      if(value === event.id){
-        indexEdit = index;
-      }
-      }));
-    //this.posts[indexEdit] = event;
-    Object.assign(this.posts[indexEdit],event);
+    // let indexEdit;
+    // this.posts.filter((post, index)=> Object.values(post).forEach(value=>{
+    //   if(value === event.id){
+    //     indexEdit = index;
+    //   }
+    //   }));
+    // //this.posts[indexEdit] = event;
+    // Object.assign(this.posts[indexEdit],event);
+    console.log(event);
     this.subModal$.componentInstance.sendPost.unsubscribe();
     this.subModal$.close();
   }
@@ -78,15 +77,19 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
     this.subSnack$ = await event.snack.onAction().subscribe(()=> this.posts = backup);
   }
 
-  onFilter(event) {
-    if(event !== 'all'){
-      this.sub$.unsubscribe();
-    this.subFilter$ = this.apiCallService.getPosts().subscribe(x=> this.posts = x.filter((post)=> Object.values(post).includes(event)));
-    }else {
-      this.getPosts();
-      this.subFilter$.unsubscribe();
-    }
+  // onFilter(event) {
+  //   if(event !== 'all'){
+  //     this.sub$.unsubscribe();
+  //   this.subFilter$ = this.apiCallService.getPosts().subscribe(x=> this.posts = x.filter((post)=> Object.values(post).includes(event)));
+  //   }else {
+  //     this.getPosts();
+  //     this.subFilter$.unsubscribe();
+  //   }
 
+  // }
+
+  onFilter(event) {
+    this.apiCallService.selectCategory(event);
   }
 
 }

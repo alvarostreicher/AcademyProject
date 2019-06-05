@@ -1,4 +1,4 @@
-<div *ngIf="filteredPost && filteredPost[0][0] as post">
+<div *ngIf="post$ | async as post">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-xl-12 resetPadding">
 			<div class="btnTop">

@@ -42,7 +42,7 @@ export class MiniaturePostComponent implements OnInit {
         id: this.id,
         image: this.Image,
         title: this.title,
-        description: this.shortDescription,
+        description: this.description,
         category: this.category
       }
     });

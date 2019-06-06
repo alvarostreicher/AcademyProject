@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map, filter, subscribeOn } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Posts } from './Interfaces/posts';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ApiCallsService {
 
   posts : Observable<object[]>;
-  newPosts : BehaviorSubject<object[]> = new BehaviorSubject<object[]>([]);
+  newPosts : BehaviorSubject<Posts[]> = new BehaviorSubject<Posts[]>([]);
   categorySubject: BehaviorSubject<string> = new BehaviorSubject<string>('all');
   selectedCategory$: Observable<string> = this.categorySubject.asObservable();
   combinePostsAndCategory$: Observable<object[]>;
+  backup : BehaviorSubject<Posts[]> = new BehaviorSubject<Posts[]>([]);
+  url = `http://localhost:3000`;
 
   constructor(private http: HttpClient ) { 
     this.getPosts();
@@ -34,32 +37,51 @@ export class ApiCallsService {
   }
 
   getCategories(): Observable<[]> {
-   return this.http.get<[]>('http://localhost:3000/api/v1/categories')
+   return this.http.get<[]>(`${this.url}/api/v1/categories`)
   }
 
   getPosts(): Observable<object[]> {
-    this.http.get<object[]>('http://localhost:3000/api/v1/posts').subscribe((post)=> this.newPosts.next(post));
+    this.http.get<Posts[]>(`${this.url}/api/v1/posts`).subscribe((post)=> this.newPosts.next(post), (error)=> console.log(error));
     return this.newPosts;
   }
 
   addPost(objeto): Observable<object[]> {
-    this.http.post<object[]>('http://localhost:3000/api/v1/posts', objeto).subscribe((response)=> this.newPosts.next([response].concat(this.newPosts.getValue())));
+    this.http.post<Posts>(`${this.url}/api/v1/posts`, objeto).subscribe((response)=> this.newPosts.next([response].concat(this.newPosts.getValue())), (error)=> console.log(error));
     return this.newPosts;
   }   
 
   getPost(id): Observable<object[]> {
-    let path = `http://localhost:3000/api/v1/posts/${id}`;
+    let path = `${this.url}/api/v1/posts/${id}`;
     return this.http.get<object[]>(path);
   }
 
   editPost(data): Observable<object[]> {
-    let path = `http://localhost:3000/api/v1/posts/post`;
+    let path = `${this.url}/api/v1/posts/post`;
     ////////me quede aqui edittando
-    let change = this.newPosts.getValue()
-    this.http.post<object[]>(path, data).subscribe((response) => this.newPosts.next(response)=> this.newPosts.next())
+    let edit;
+    this.http.post<Posts>(path, data).subscribe((response) => edit = this.newPosts.getValue().map( (post) => {
+      if(post._id === response._id){
+        return Object.assign(post, response)
+      }else {
+        return post;
+      }
+    } ) , (error)=> console.log(error) ,() => console.log('------>',edit) )
     return this.newPosts;
   }
 
+  deletePost(post) {
+    this.backup.next(this.newPosts.getValue());
+    let deleted = this.newPosts.getValue().filter((posts)=>posts._id !== post.id);
+    this.newPosts.next(deleted);
+  }
 
+  backups () {
+    this.newPosts.next(this.backup.getValue());
+  }
+
+  trueDelete(post) {
+    console.log('i still trigger')
+    // this.http.post(`${this.url}/api/v1/posts/delete`, {_id: post.id}).subscribe((response)=>console.log(response), (error)=> console.log(error))
+  }
 
 }

@@ -48,15 +48,7 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   }
 
   editPostEvent(event) {
-    // let indexEdit;
-    // this.posts.filter((post, index)=> Object.values(post).forEach(value=>{
-    //   if(value === event.id){
-    //     indexEdit = index;
-    //   }
-    //   }));
-    // //this.posts[indexEdit] = event;
-    // Object.assign(this.posts[indexEdit],event);
-    console.log(event);
+    this.apiCallService.editPost(event);
     this.subModal$.componentInstance.sendPost.unsubscribe();
     this.subModal$.close();
   }
@@ -66,27 +58,18 @@ export class PostsIndexComponent implements OnInit, OnDestroy {
   }
 
  async snackBarEvent(event){
-    let backup = this.posts.map((x)=> x);
-    let indexDelete;
-    this.posts.filter((post, index)=> Object.values(post).forEach(value=>{
-      if(value === event.id){
-        indexDelete = index;
-      }
-      }));
-    this.posts.splice( indexDelete, 1 );
-    this.subSnack$ = await event.snack.onAction().subscribe(()=> this.posts = backup);
+    // let backup = this.posts.map((x)=> x);
+    // let indexDelete;
+    // this.posts.filter((post, index)=> Object.values(post).forEach(value=>{
+    //   if(value === event.id){
+    //     indexDelete = index;
+    //   }
+    //   }));
+    // this.posts.splice( indexDelete, 1 );
+    this.apiCallService.deletePost(event);
+    this.subSnack$ = await event.snack.onAction().subscribe(() => this.apiCallService.backups());
+    this.subSnack$ = await event.snack.afterDismissed().subscribe(()=> this.apiCallService.trueDelete(event))
   }
-
-  // onFilter(event) {
-  //   if(event !== 'all'){
-  //     this.sub$.unsubscribe();
-  //   this.subFilter$ = this.apiCallService.getPosts().subscribe(x=> this.posts = x.filter((post)=> Object.values(post).includes(event)));
-  //   }else {
-  //     this.getPosts();
-  //     this.subFilter$.unsubscribe();
-  //   }
-
-  // }
 
   onFilter(event) {
     this.apiCallService.selectCategory(event);

@@ -42,7 +42,6 @@ export class PostModalComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(){
-    this.sub$.unsubscribe();
   }
 
   onSubmit() {

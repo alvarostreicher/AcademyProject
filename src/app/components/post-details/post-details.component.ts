@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiCallsService } from 'src/app/api-calls.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
+import { Posts } from '../../Interfaces/posts';
 
 @Component({
   selector: 'app-post-details',
@@ -14,7 +15,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
   filteredPost;
   Image: String; 
   Forma : FormGroup;
-  post$ : Observable<object[]>;
+  post$ : Observable<Posts>;
   
   constructor( private route : ActivatedRoute, private apiCallsServices : ApiCallsService, private formBuilder : FormBuilder,  private router: Router, ) { }
 
@@ -22,7 +23,7 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
     this.paramId = this.route.snapshot.paramMap.get("id")
     this.getPost();
     this.Forma = this.formBuilder.group({
-      comment: [null, Validators.required]
+      content: [null, Validators.required]
     })
   }
 
@@ -39,11 +40,14 @@ export class PostDetailsComponent implements OnInit, OnDestroy {
 
   addComment(){
     if(this.Forma.status === 'VALID'){
-      this.filteredPost[0][0].comments.push({
-        id: this.filteredPost[0][0].comments.length + 1,
-        author: 'Juan Cecina',
-        content: this.Forma.value.comment
-      })
+      let comment = {
+        id: this.paramId,
+        body: {
+          author: "Juan cecina",
+          ...this.Forma.value
+        }
+      }
+      this.apiCallsServices.addComment(comment);
     }
     this.Forma.reset();
   }

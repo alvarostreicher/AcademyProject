@@ -4,7 +4,7 @@ export interface Posts {
     description: String,
     shortDescription: String,
     category: String,
-    comments: [],
+    comments: Array<[]>,
     image: String
 
 }

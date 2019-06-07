@@ -32,8 +32,8 @@
 			<form (ngSubmit)="addComment()" [formGroup]="Forma">
 				<mat-form-field class="resetWidth">
 					<mat-label class="placeHolderSize">Write a comment</mat-label>
-					<textarea type="text" matInput formControlName="comment"></textarea>
-					<mat-error *ngIf="Forma.controls['comment'].errors?.required">Comment can't be empty</mat-error>
+					<textarea type="text" matInput formControlName="content"></textarea>
+					<mat-error *ngIf="Forma.controls['content'].errors?.required">Comment can't be empty</mat-error>
 				</mat-form-field>
 				<button mat-raised-button color="primary" type="sumbit">Add</button>
 			</form>

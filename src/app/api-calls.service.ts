@@ -13,9 +13,17 @@ export class ApiCallsService {
   newPosts : BehaviorSubject<Posts[]> = new BehaviorSubject<Posts[]>([]);
   categorySubject: BehaviorSubject<string> = new BehaviorSubject<string>('all');
   selectedCategory$: Observable<string> = this.categorySubject.asObservable();
-  combinePostsAndCategory$: Observable<object[]>;
+  combinePostsAndCategory$: Observable<Posts[]>;
   backup : BehaviorSubject<Posts[]> = new BehaviorSubject<Posts[]>([]);
   url = `http://localhost:3000`;
+  undo = false;
+  singlePost : BehaviorSubject<Posts> = new BehaviorSubject<Posts>({_id: null,
+    title: '',
+    description: '',
+    shortDescription: '',
+    category: '',
+    comments: [],
+    image: ''});
 
   constructor(private http: HttpClient ) { 
     this.getPosts();
@@ -50,14 +58,14 @@ export class ApiCallsService {
     return this.newPosts;
   }   
 
-  getPost(id): Observable<object[]> {
+  getPost(id): Observable<Posts> {
     let path = `${this.url}/api/v1/posts/${id}`;
-    return this.http.get<object[]>(path);
+    this.http.get<Posts>(path).subscribe((response)=> this.singlePost.next(response));
+    return this.singlePost;
   }
 
   editPost(data): Observable<object[]> {
     let path = `${this.url}/api/v1/posts/post`;
-    ////////me quede aqui edittando
     let edit;
     this.http.post<Posts>(path, data).subscribe((response) => edit = this.newPosts.getValue().map( (post) => {
       if(post._id === response._id){
@@ -65,7 +73,7 @@ export class ApiCallsService {
       }else {
         return post;
       }
-    } ) , (error)=> console.log(error) ,() => console.log('------>',edit) )
+    } ) , (error)=> console.log(error) )
     return this.newPosts;
   }
 
@@ -76,12 +84,19 @@ export class ApiCallsService {
   }
 
   backups () {
+    this.undo = true;
     this.newPosts.next(this.backup.getValue());
   }
 
   trueDelete(post) {
-    console.log('i still trigger')
-    // this.http.post(`${this.url}/api/v1/posts/delete`, {_id: post.id}).subscribe((response)=>console.log(response), (error)=> console.log(error))
+    if(!this.undo){
+      this.http.post(`${this.url}/api/v1/posts/delete`, {_id: post.id}).subscribe((response)=>response, (error)=> console.log(error))
+    }
+    this.undo = false;
+  }
+
+  addComment(comment) {
+    this.http.post(`${this.url}/api/v1/posts/comment/${comment.id}`,comment.body).subscribe((response)=> this.singlePost.getValue().comments.push(comment.body), (err)=> err);
   }
 
 }

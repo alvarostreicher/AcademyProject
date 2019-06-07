@@ -3,6 +3,7 @@ import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map, filter, subscribeOn } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Posts } from './Interfaces/posts';
+import { Cacheable } from 'ngx-cacheable';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,7 @@ export class ApiCallsService {
   public selectCategory(category: string) {
     this.categorySubject.next(category);
   }
-
+  @Cacheable()
   getCategories(): Observable<[]> {
    return this.http.get<[]>(`${this.url}/api/v1/categories`)
   }

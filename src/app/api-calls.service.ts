@@ -97,7 +97,9 @@ export class ApiCallsService {
   }
 
   addComment(comment) {
-    this.http.post(`${this.url}/api/v1/posts/comment/${comment.id}`,comment.body).subscribe((response)=> this.singlePost.getValue().comments.push(comment.body), (err)=> err);
+    this.http.post(`${this.url}/api/v1/posts/comment/${comment.id}`,comment.body).subscribe((response)=> { this.newPosts.getValue().map((post)=>{ 
+      if(post._id === this.singlePost.getValue()._id){post.comments.push(null)} }); 
+      return this.singlePost.getValue().comments.push(comment.body)} , (err)=> err);
   }
 
 }

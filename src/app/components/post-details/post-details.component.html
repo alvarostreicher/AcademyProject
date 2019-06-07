@@ -20,7 +20,7 @@
 		<div class="postContainer">
 			<div class="commentContainer">
 			<h3>Comments</h3>
-			<mat-card *ngFor="let comment of post.comments">
+			<mat-card *ngFor="let comment of post.comments" class="individualCard">
 				<mat-card-header>
 					<div mat-card-avatar class="avatar"><mat-icon class="avatarSize">person</mat-icon></div>
 					<mat-card-title>{{ comment.author  }}</mat-card-title>

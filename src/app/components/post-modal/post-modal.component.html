@@ -1,32 +1,32 @@
 <h3 class="modalTitle">{{ modalTitle }}</h3>
-<form [formGroup]="Forma" (ngSubmit)="onSubmit()">
+<form [formGroup]="Form" (ngSubmit)="onSubmit()">
 <mat-dialog-content class="columnLayout">
     <mat-form-field>
       <mat-label>Title</mat-label>
       <input type="text" matInput formControlName="title">
-      <mat-error *ngIf="Forma.controls['title'].errors?.required">Title can't be empty</mat-error>
+      <mat-error *ngIf="Form.controls['title'].errors?.required">Title can't be empty</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Description</mat-label>
       <textarea type="text" matInput formControlName="description"></textarea>
-      <mat-error *ngIf="Forma.controls['description'].errors?.required">Description can't be empty</mat-error>
+      <mat-error *ngIf="Form.controls['description'].errors?.required">Description can't be empty</mat-error>
     </mat-form-field>
 
     <mat-form-field>
         <mat-select value="travel" placeholder="Category" formControlName="category">
           <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="Forma.controls['category'].errors?.required">You must select a category</mat-error>
-        <mat-error *ngIf="Forma.controls['category'].errors?.minLength">Oops.. Categories doesn't load, please contact Admin</mat-error>
+        <mat-error *ngIf="Form.controls['category'].errors?.required">You must select a category</mat-error>
+        <mat-error *ngIf="Form.controls['category'].errors?.minLength">Oops.. Categories doesn't load, please contact Admin</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>URL of the image</mat-label>
         <input type="url" matInput formControlName="image">
         <mat-icon matSuffix>link</mat-icon>
-        <mat-error *ngIf="Forma.controls['image'].errors?.required">You must enter an URL image</mat-error>
-        <mat-error *ngIf="Forma.controls['image'].errors?.pattern">Enter a valid URL</mat-error>
+        <mat-error *ngIf="Form.controls['image'].errors?.required">You must enter an URL image</mat-error>
+        <mat-error *ngIf="Form.controls['image'].errors?.pattern">Enter a valid URL</mat-error>
       </mat-form-field>
   
 </mat-dialog-content>

@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class PostModalComponent implements OnInit, OnDestroy {
 
-  Forma : FormGroup;
+  Form : FormGroup;
   categories : Array<object> = [];
   sub$ : Subscription;
   modalTitle : String;
@@ -23,19 +23,19 @@ export class PostModalComponent implements OnInit, OnDestroy {
     this.getCategories();
     if(!this.data){
       this.modalTitle = 'Create Post';
-      this.Forma = this.formBuilder.group({
+      this.Form = this.formBuilder.group({
         title: [null, Validators.required],
         description: [null,Validators.required],
-        category: [this.categories.length > 0 ? this.categories[0] : '' , [Validators.required, Validators.min(0)]],
+        category: ['' , [Validators.required, Validators.min(0)]],
         image: ['https://source.unsplash.com/random', [Validators.required, Validators.pattern("^(http|https)+://+[a-z-A-Z|.|?|%|0-9|/_=+]+")]]
       })
     } else {
       this.modalTitle = 'Edit Post';
-      this.Forma = this.formBuilder.group({
+      this.Form = this.formBuilder.group({
         title: [this.data.title, Validators.required],
         id: [this.data.id],
         description: [this.data.description,Validators.required],
-        category: [this.categories.length > 0 ? this.categories[0] : this.data.category , [Validators.required, Validators.min(0)]],
+        category: [this.data.category , [Validators.required, Validators.min(0)]],
         image: [this.data.image, [Validators.required, Validators.pattern("^(http|https)+://+[a-z-A-Z|.|?|%|0-9|/_=+]+")]]
       })
     }
@@ -45,8 +45,8 @@ export class PostModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if(this.Forma.status === 'VALID'){
-      this.sendPost.emit(this.Forma.value)
+    if(this.Form.status === 'VALID'){
+      this.sendPost.emit(this.Form.value)
     }
   }
 
